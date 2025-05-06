@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+
+<body>
+  <header class="dashboard-header">
+    <h1>Welcome to the The Great Library</h1>
+    <a href="/logout-user" class="logout-button">Logout</a>
+  </header>
+
+  <main class="dashboard-main">
+    <div class="card" onclick="window.location.href='/user-books.html'">
+      <h2>📚 Browse Books</h2>
+      <p>Search and explore the library's book collection.</p>
+    </div>
+
+
+    <div class="card" onclick="window.location.href='/my-account';">
+      <h2>👤 My Account</h2>
+      <p>Update your personal details and preferences.</p>
+    </div>
+
+  </main>
+</body>
+
+</html>

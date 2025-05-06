@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login - Library System</title>
+  <link rel="stylesheet" href="/admin/admin-login.css" />
+</head>
+
+<body>
+
+  <div class="admin-login-container">
+    <form class="admin-login-form" method="POST" action="/admin-login">
+      <h2 class="admin-login-title">Admin Login</h2>
+
+      <label for="admin-email" class="admin-login-label">Email</label>
+      <input type="text" id="admin-email" name="email" class="admin-login-input" required />
+
+      <label for="admin-password" class="admin-login-label">Password</label>
+      <input type="password" id="admin-password" name="password" class="admin-login-input" required />
+
+      <button type="submit" class="admin-login-button">Login</button>
+
+      <button type="button" class="admin-login-back" onclick="window.location.href='/'">Back to Home</button>
+    </form>
+  </div>
+
+</body>
+
+</html>

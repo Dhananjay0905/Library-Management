@@ -1,0 +1,84 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f7f8;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6) url('/admin/library.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-blend-mode: darken;
+  min-height: 100vh;
+}
+
+
+.admin-login-container {
+  background-color: #cdddd4;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-login-title {
+  text-align: center;
+  color: #2E2F2F;
+  margin-bottom: 30px;
+}
+
+.admin-login-label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #2E2F2F;
+}
+
+.admin-login-input {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #bdc3c7;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.admin-login-button {
+  background-color: #8acc81;
+  color: #2E2F2F;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.admin-login-button:hover {
+  background-color: #553a00;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.admin-login-back {
+  background-color: #7cb774;
+  color: #2E2F2F;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.admin-login-back:hover {
+  background-color: #553a00;
+  color:white;
+  transition: background-color 0.3s ease;
+}

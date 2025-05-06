@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register</title>
+  <link rel="stylesheet" href="register.css" />
+</head>
+<body>
+  <div class="register-container">
+    <form class="register-form" action="/register" method="POST" onsubmit="return validateForm()">
+      <h2 class="register-title">Register</h2>
+
+      <label for="first_name" class="register-label">First Name</label>
+      <input type="text" id="first_name" name="first_name" class="register-input" required />
+
+      <label for="last_name" class="register-label">L Name</label>
+      <input type="text" id="last_name" name="last_name" class="register-input" required />
+
+      <label for="age" class="register-label">Age</label>
+      <input type="number" id="age" name="age" class="register-input" required />
+
+      <label for="email" class="register-label">Email</label>
+      <input type="email" id="email" name="email" class="register-input" required />
+
+      <label for="password" class="register-label">Password</label>
+      <input type="password" id="password" name="password" class="register-input" required />
+
+      <label for="re-password" class="register-label">Re-enter Password</label>
+      <input type="password" id="re-password" name="re_password" class="register-input" required />
+        
+      <button type="submit" class="register-button">Register</button>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      const password = document.getElementById('password').value;
+      const rePassword = document.getElementById('re-password').value;
+
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+
+      if (!passwordRegex.test(password)) {
+        alert("Password must be at least 8 characters long and include a capital letter, small letter, digit, and special character.");
+        return false;
+      }
+
+      if (password !== rePassword) {
+        alert("Passwords do not match.");
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+</body>
+</html>

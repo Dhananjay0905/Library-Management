@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Issue/Return Management</title>
+    <link rel="stylesheet" href="/admin/issues.css" />
+
+</head>
+
+<body>
+    <div class="top-bar">
+        <h1>Issue/Return Panel</h1>
+        <a class="dashboard-button" href="/admin-dashboard">Back to Dashboard</a>
+    </div>
+
+    <div class="container">
+        <h1>Manage Book Issues</h1>
+        <div style="margin-bottom: 20px;">
+            <button onclick="loadUsers('all')">Show All Users</button>
+            <button onclick="loadUsers('issued')">Show Users With Issued Book</button>
+            <button onclick="loadUsers('not-issued')">Show Users Without Issued Book</button>
+        </div>
+
+        <table id="users-table">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Book Issued</th>
+                    <th>Issue Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div id="edit-modal">
+        <h3>Issue Book</h3>
+        <input type="text" id="book-id" placeholder="Book ID">
+        <input type="date" id="issue-date">
+        <div style="display: flex; justify-content: space-between;">
+            <button onclick="saveIssue()">Save</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        let currentEditUserId = null;
+
+        async function loadUsers(filter = 'all') {
+            const res = await fetch('/api/admin/users');
+            const users = await res.json();
+            const tbody = document.querySelector("#users-table tbody");
+            tbody.innerHTML = '';
+
+            let filteredUsers = users;
+            if (filter === 'issued') {
+                filteredUsers = users.filter(u => u.current_book_issued && u.current_book_issued.trim() !== '');
+            } else if (filter === 'not-issued') {
+                filteredUsers = users.filter(u => !u.current_book_issued || u.current_book_issued.trim() === '');
+            }
+
+            filteredUsers.forEach(user => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+        <td>${user.first_name} ${user.last_name}</td>
+        <td>${user.current_book_issued || ''}</td>
+        <td>${user.issue_date || ''}</td>
+        <td>
+          <button onclick="confirmReturn('${user._id}')">Return</button>
+          <button onclick="openEdit('${user._id}')">Edit</button>
+        </td>
+      `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function confirmReturn(userId) {
+            // Find the user row from the table
+            const row = [...document.querySelectorAll('#users-table tbody tr')]
+                .find(r => r.querySelector('button')?.onclick?.toString()?.includes(userId));
+
+            const issuedBook = row?.children[1]?.textContent.trim();
+
+            if (!issuedBook) {
+                alert("This user has no book issued.");
+                return;
+            }
+
+            if (confirm("Are you sure the user returned the book?")) {
+                fetch('/api/admin/return-book', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId })
+                }).then(() => loadUsers());
+            }
+        }
+
+
+        function openEdit(userId) {
+            currentEditUserId = userId;
+            document.getElementById('edit-modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('edit-modal').style.display = 'none';
+        }
+
+        async function saveIssue() {
+            const bookId = document.getElementById('book-id').value.trim();
+            const issueDate = document.getElementById('issue-date').value;
+
+            const response = await fetch('/api/admin/issue-book', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId: currentEditUserId, bookId, issueDate })
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                alert(result.error || 'Something went wrong.');
+            } else {
+                closeModal();
+                loadUsers();
+            }
+        }
+
+
+        loadUsers(); // Initial load (all users)
+    </script>
+
+</body>
+
+</html>

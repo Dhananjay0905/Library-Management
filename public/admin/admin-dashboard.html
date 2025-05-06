@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/admin/admin-dashboard.css" />
+</head>
+
+<body>
+  <header class="dashboard-header">
+    <h1>Admin Dashboard</h1>
+    <a class="logout-button" href="/admin-logout">Logout</a>
+  </header>
+
+  <main class="dashboard-main">
+
+    <!-- <div class="card" onclick="location.href='/admin/users';">
+      <h2>User Management</h2>
+      <p>View, add, edit, or delete users. Reset passwords as needed.</p>
+    </div> -->
+
+    <div class="card" onclick="location.href='/admin/books';">
+      <h2>Book Inventory</h2>
+      <p>Add, edit, or remove books in the library inventory.</p>
+    </div>
+
+    <div class="card" onclick="location.href='/admin/issues';">
+      <h2>Issue/Return</h2>
+      <p>Manage issued books, returns, due dates, and fines.</p>
+    </div>
+
+  </main>
+</body>
+
+</html>

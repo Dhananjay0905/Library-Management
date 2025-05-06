@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Account</title>
+  <link rel="stylesheet" href="/my-account.css" />
+</head>
+<body>
+  <div class="top-bar">
+    <h1>My Account</h1>
+    <a href="/dashboard" class="dashboard-button">Back to Dashboard</a>
+  </div>
+
+  <div class="container">
+
+    <!-- Update Details Form -->
+    <section style="margin-bottom: 60px;">
+      <h2>Update Personal Details</h2>
+      <form action="/update-details" method="POST">
+        <label>First Name</label>
+        <input type="text" name="first_name" required class="form-input" />
+
+        <label>Last Name</label>
+        <input type="text" name="last_name" required class="form-input" />
+
+        <label>Age</label>
+        <input type="number" name="age" required class="form-input" />
+
+        <button type="submit">Update Details</button>
+      </form>
+    </section>
+
+    <!-- Update Password Form -->
+    <section>
+      <h2>Change Password</h2>
+      <form action="/update-password" method="POST">
+        <label>Current Password</label>
+        <input type="password" name="current_password" required class="form-input" />
+
+        <label>New Password</label>
+        <input type="password" name="new_password" required class="form-input" />
+
+        <label>Confirm New Password</label>
+        <input type="password" name="confirm_password" required class="form-input" />
+
+        <button type="submit">Update Password</button>
+      </form>
+    </section>
+
+  </div>
+</body>
+</html>
